@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: anti-therapy-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:nutelllo/anti-therapy.git' # ЗАМЕНИ НА СВОЙ REPO
+    targetRevision: HEAD
+    path: charts/anti-therapy # Путь до папки с Chart.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,7 +1,7 @@
 backend:
   image: ghcr.io/nutelllo/therapy-backend
   tag: "v1"
-  ollamaUrl: "http://dummy-colab-url.com/api/generate"
+  ollamaUrl: "https://receiving-lap-mas-ala.trycloudflare.com/api/generate"
 frontend:
   image: ghcr.io/nutelllo/therapy-frontend
   tag: "v1"
