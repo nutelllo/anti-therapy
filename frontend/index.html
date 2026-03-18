@@ -38,7 +38,7 @@
             responseArea.innerText = 'Слушаю тебя...';
 
             try {
-                const res = await fetch('http://localhost:8000/complain', {
+                const res = await fetch('ac0982543a1194ee0a24ec8722b45698-509847464.ca-central-1.elb.amazonaws.com', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: input })
