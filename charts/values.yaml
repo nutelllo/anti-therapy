@@ -4,4 +4,4 @@ backend:
   ollamaUrl: "https://cindy-fax-musical-votes.trycloudflare.com/api/generate"
 frontend:
   image: ghcr.io/nutelllo/therapy-frontend
-  tag: "v2"
+  tag: "v3"
