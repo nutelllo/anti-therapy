@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Агрессивная поддержка</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; padding: 50px; max-width: 600px; margin: auto; }
+        textarea { width: 100%; height: 100px; padding: 10px; margin-bottom: 20px; background: #222; color: #fff; border: 1px solid #444; border-radius: 5px; }
+        button { background-color: #e53935; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-weight: bold; width: 100%; }
+        button:hover { background-color: #b71c1c; }
+        #responseArea { margin-top: 30px; padding: 15px; background: #1e1e1e; border-left: 4px solid #e53935; display: none; white-space: pre-wrap;}
+        .loading { opacity: 0.5; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <h2>🔥 Выговорись</h2>
+    <p>Напиши, что тебя бесит, и получи абсолютно предвзятую и агрессивную поддержку.</p>
+
+    <textarea id="complaintInput" placeholder="Как же меня достало..."></textarea>
+    <button id="sendBtn" onclick="sendComplaint()">Жаловаться</button>
+
+    <div id="responseArea"></div>
+
+    <script>
+        async function sendComplaint() {
+            const input = document.getElementById('complaintInput').value;
+            if (!input) return;
+
+            const btn = document.getElementById('sendBtn');
+            const responseArea = document.getElementById('responseArea');
+
+            // Состояние загрузки
+            btn.classList.add('loading');
+            btn.innerText = 'Брат печатает (Ждем CPU)...';
+            responseArea.style.display = 'block';
+            responseArea.innerText = 'Слушаю тебя...';
+
+            try {
+                const res = await fetch('http://localhost:8000/complain', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: input })
+                });
+
+                const data = await res.json();
+                
+                if (res.ok) {
+                    responseArea.innerText = data.reply;
+                } else {
+                    responseArea.innerText = "Черт, что-то пошло не так: " + data.detail;
+                }
+            } catch (error) {
+                responseArea.innerText = "Бэкенд недоступен. Проверь, запущен ли FastAPI.";
+            } finally {
+                btn.classList.remove('loading');
+                btn.innerText = 'Жаловаться';
+            }
+        }
+    </script>
+
+</body>
+</html>

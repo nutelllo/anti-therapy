@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: therapy-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: therapy-frontend
+  template:
+    metadata:
+      labels:
+        app: therapy-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "{{ .Values.frontend.image }}:{{ .Values.frontend.tag }}"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: therapy-frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: therapy-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

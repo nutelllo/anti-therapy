@@ -1,0 +1,4 @@
+apiVersion: v2
+name: anti-therapy
+description: A helm chart for the Anti-Therapy GitOps project
+version: 0.1.0
