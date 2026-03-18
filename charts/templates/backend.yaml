@@ -26,6 +26,7 @@ kind: Service
 metadata:
   name: therapy-backend
 spec:
+  type: LoadBalancer # <--- БЫЛО ClusterIP, СТАЛО LoadBalancer
   selector:
     app: therapy-backend
   ports:
