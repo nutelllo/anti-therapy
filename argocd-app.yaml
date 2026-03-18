@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/nutelllo/anti-therapy.git' # ЗАМЕНИ НА СВОЙ REPO
-    targetRevision: HEAD
-    path: charts/anti-therapy # Путь до папки с Chart.yaml
+    repoURL: 'https://github.com/nutelllo/anti-therapy.git'
+    targetRevision: master # У тебя в логах была ветка master
+    path: charts # <--- Указываем папку, где лежит Chart.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
